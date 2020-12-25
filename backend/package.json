@@ -2,22 +2,10 @@
   "name": "home-display",
   "version": "0.0.1",
   "description": "Web app for our home display, to show pictures and videos.",
-  "main": "index.js",
+  "main": "src/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/index.js",
-    "lint": "lint-staged"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint"
-    }
-  },
-  "lint-staged": {
-    "./**/*.js": [
-      "prettier --write",
-      "eslint --fix"
-    ]
+    "start": "nodemon frontend/src/server.js"
   },
   "repository": {
     "type": "git",
@@ -33,6 +21,12 @@
     "url": "https://github.com/mateusk/home-display/issues"
   },
   "homepage": "https://github.com/mateusk/home-display#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.8"
+  },
   "devDependencies": {
     "eslint": "^7.16.0",
     "eslint-config-airbnb": "^18.2.1",
