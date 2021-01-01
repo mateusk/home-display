@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const mongoosePaginate = require('mongoose-paginate')
 
 const mediaSchema = new mongoose.Schema({
-  type: {
+  fileType: {
     type: String,
     required: true,
   },
