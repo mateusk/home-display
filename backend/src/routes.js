@@ -1,5 +1,6 @@
 // Requiring the Express
 const express = require('express')
+
 const routes = express.Router()
 
 const mediaController = require('./controllers/MediaController')
