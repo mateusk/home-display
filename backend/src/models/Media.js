@@ -1,20 +1,23 @@
 const mongoose = require('mongoose')
 const mongoosePaginate = require('mongoose-paginate')
 
-const mediaSchema = new mongoose.Schema({
-  fileType: {
-    type: String,
-    required: true,
+const mediaSchema = new mongoose.Schema(
+  {
+    fileType: {
+      type: String,
+      required: true,
+    },
+    fileURL: {
+      type: String,
+      required: true,
+    },
+    fileName: {
+      type: String,
+      required: true,
+    },
   },
-  fileURL: {
-    type: String,
-    required: true,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-})
+  { virtuals: true, versionKey: false }
+)
 
 // Adding the "mongoose-paginate" plugin, to allow
 // for pagination of requests:
