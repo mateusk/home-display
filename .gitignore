@@ -106,3 +106,4 @@ dist
 # Media files
 ./media
 vetur.config.js
+db-frontend/jsconfig.json
