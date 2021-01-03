@@ -1,0 +1,22 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "parserOptions": {
+    "parser": "babel-eslint"
+  },
+  "extends": [
+    "airbnb",
+    "plugin:vue/recommended",
+    "eslint:recommended",
+    "prettier",
+    "prettier/vue",
+    "prettier/standard"
+  ],
+  "rules": {
+    "eqeqeq": "off",
+    "class-methods-use-this": "off"
+  }
+}
