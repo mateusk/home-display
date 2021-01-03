@@ -2,25 +2,25 @@
   <div class="submit-form">
     <div v-if="!submitted">
       <div class="form-group">
-        <label for="fileURL">File URL</label>
+        <label for="fileUpload">File: </label>
         <input
-          type="file"
+          id="fileUpload"
           ref="mediafiles"
+          type="file"
           accept=".jpg, .jpeg, .png, .mp4"
-          @change="onFileChange"
           class="form-control"
-          id="fileURL"
           required
-          name="fileURL"
+          name="fileUpload"
+          @change="onFileChange"
         />
       </div>
 
-      <button @click="saveMedia" class="btn btn-success">Save</button>
+      <button class="btn btn-success" type="button" :disabled="!selectedFile" @click="uploadMedia">Upload</button>
     </div>
 
     <div v-else>
-      <h4>You submitted successfully!</h4>
-      <button class="btn btn-success" @click="newMedia">Add</button>
+      <h4>You submitted the media file successfully!</h4>
+      <button class="btn btn-dark" @click="reset">Return to Media list</button>
     </div>
   </div>
 </template>
@@ -29,40 +29,45 @@
 import MediaDataService from '../../services/MediaDataService'
 
 export default {
-  name: 'add-media',
+  name: 'AddMedia',
   data() {
     return {
       media: {
-        fileURL: '',
-        fileType: '',
+        fileName: '',
+        id: '',
       },
       submitted: false,
+      selectedFile: false,
+      fileToUpload: '',
     }
   },
+
   methods: {
-    async saveMedia() {
-      const data = {
-        fileURL: this.media.fileURL,
-        fileType: this.media.fileType,
-      }
-      console.log(data)
-      const newMedia = await MediaDataService.store(data)
-      this.media.id = newMedia.data._id
-      console.log(newMedia.data)
+    async uploadMedia() {
+      const formData = new FormData()
+      formData.append('file', this.fileToUpload) // appending file
+      const newMedia = await MediaDataService.store(formData)
+      // console.log(newMedia)
+      // console.log(`newMedia.data.id: ${newMedia.data.id}`)
+      // console.log(`newMedia.data.fileName: ${newMedia.data.fileName}`)
+      this.media.id = newMedia.data.id
+      this.media.fileName = newMedia.data.fileName
       this.submitted = true
     },
 
-    newMedia() {
-      this.submitted = false
-      this.media = {}
+    onFileChange(e) {
+      const [file] = e.target.files
+      this.fileToUpload = file // accessing file
+      this.selectedFile = true
     },
 
-    onFileChange() {
-      const fileURL = this.$refs.mediafiles.files[0].name
-      const fileType = this.$refs.mediafiles.files[0].type
-      this.media.fileURL = fileURL
-      this.media.fileType = fileType
-      console.log(this.media)
+    reset() {
+      this.submitted = false
+      this.selectedFile = false
+      this.fileToUpload = ''
+      this.media.file = ''
+      this.media.fileName = ''
+      this.$router.push({ name: 'media' })
     },
   },
 }

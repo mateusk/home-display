@@ -1,13 +1,19 @@
 <template>
   <div id="app">
     <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <router-link to="/" class="navbar-brand">Home Display</router-link>
+      <router-link to="/" class="navbar-brand">
+        Home Display
+      </router-link>
       <div class="navbar-nav mr-auto">
         <li class="nav-item">
-          <router-link to="/media" class="nav-link">Media</router-link>
+          <router-link to="/media" class="nav-link">
+            Media list
+          </router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/add" class="nav-link">Add</router-link>
+          <router-link to="/add" class="nav-link">
+            Add media
+          </router-link>
         </li>
       </div>
     </nav>
@@ -20,6 +26,6 @@
 
 <script>
 export default {
-  name: 'app',
+  name: 'App',
 }
 </script>

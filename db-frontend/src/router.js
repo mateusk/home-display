@@ -14,12 +14,12 @@ export default new Router({
     },
     {
       path: '/media/:id',
-      name: 'media-details',
-      component: () => import('./components/Media'),
+      name: 'edit-media',
+      component: () => import('./components/EditMedia'),
     },
     {
       path: '/add',
-      name: 'add',
+      name: 'add-media',
       component: () => import('./components/AddMedia'),
     },
   ],
