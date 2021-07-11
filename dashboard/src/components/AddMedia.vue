@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import MediaDataService from '../../services/MediaDataService'
+import MediaDataService from '../services/MediaDataService'
 
 export default {
   name: 'AddMedia',

@@ -48,9 +48,7 @@
           <label><strong>File name:</strong></label> {{ currentMedia.fileName }}
         </div>
 
-        <a class="badge badge-warning" :href="'/media/' + currentMedia.id">
-          Edit file
-        </a>
+        <a class="badge badge-warning" :href="'/media/' + currentMedia.id"> Edit file </a>
       </div>
       <div v-if="count > 0 && !currentMedia">
         <br />
@@ -61,7 +59,7 @@
 </template>
 
 <script>
-import MediaDataService from '../../services/MediaDataService'
+import MediaDataService from '../services/MediaDataService'
 
 export default {
   name: 'MediaList',

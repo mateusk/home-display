@@ -4,9 +4,7 @@
     <br />
     <div v-if="!editCompleted">
       <h5>{{ currentMedia.fileName }}</h5>
-      <button class="btn btn-danger" @click="deleteMedia">
-        Delete
-      </button>
+      <button class="btn btn-danger" @click="deleteMedia">Delete</button>
       <br />
       <br />
       <form>
@@ -23,9 +21,7 @@
             @change="onFileChange"
           />
           <br />
-          <button :disabled="!selectedFile" type="button" class="btn btn-success" @click="updateMedia">
-            Update
-          </button>
+          <button :disabled="!selectedFile" type="button" class="btn btn-success" @click="updateMedia">Update</button>
         </div>
       </form>
     </div>
@@ -40,7 +36,7 @@
 </template>
 
 <script>
-import MediaDataService from '../../services/MediaDataService'
+import MediaDataService from '../services/MediaDataService'
 
 export default {
   name: 'EditMedia',
