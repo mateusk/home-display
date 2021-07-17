@@ -103,7 +103,11 @@ dist
 # TernJS port file
 .tern-port
 
-# Media files
-./media
 vetur.config.js
-db-frontend/jsconfig.json
+
+# Media files
+backend/media/
+backend/.env.development
+backend/.env.production
+dashboard/.env.development
+dashboard/.env.production
