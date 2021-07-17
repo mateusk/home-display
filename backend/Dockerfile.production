@@ -1,0 +1,15 @@
+FROM node:alpine
+
+ENV NODE_ENV=production
+
+WORKDIR /app
+
+ADD package.json package-lock.json ./
+
+RUN npm install --production --quiet
+
+ADD bin ./bin
+ADD src ./src
+ADD /media ./media
+
+CMD [ "npm", "start" ]

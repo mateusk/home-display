@@ -1,0 +1,15 @@
+FROM node:alpine
+
+WORKDIR /app
+
+ADD package.json package-lock.json ./
+
+RUN npm install --quiet
+
+ADD /bin ./bin
+
+ADD /media ./media
+
+## When running nodemon inside a Docker container,
+## you have to use Legacy watch (-L)
+CMD [ "npm", "run", "dev" ]

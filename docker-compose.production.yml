@@ -1,0 +1,36 @@
+version: "3"
+services:
+  # MongoDB
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+
+  # Backend
+  backend:
+    image: backend
+    build:
+      context: backend
+      dockerfile: Dockerfile.production
+    env_file: ./backend/.env.production
+    depends_on:
+      - mongo
+    ports:
+      - 3000:3000
+      - 35729:35729
+    volumes:
+      - ./backend/src:/app/src
+      - ./backend/__tests__:/app/__tests__
+      # Mount storage volume/folder into container
+      # (for Raspberry Pi, point to USB)
+      - ./backend/media:/app/media
+
+  # Dashboard
+  dashboard:
+    image: dashboard
+    build:
+      context: dashboard
+      dockerfile: Dockerfile.production
+    ports:
+      - 80:80
+    env_file: ./dashboard/.env.production
