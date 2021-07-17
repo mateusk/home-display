@@ -5,7 +5,7 @@ const path = require('path')
 const fs = require('fs')
 
 const Media = mongoose.model('Media')
-const mediaFolder = '/Users/mateusknelsen/Developer/home-display/media'
+const mediaFolder = process.env.MEDIA_FOLDER
 
 // This function replaces the '_id' property from mongoDB with 'id',
 // to avoid ESLint complaints in the frontend:
@@ -38,6 +38,7 @@ module.exports = {
 
     try {
       // mv() method places the file inside public directory
+      console.log(uploadedFileURL)
       await uploadedFile.mv(uploadedFileURL)
     } catch (error) {
       return response.status(500).send({ msg: 'Error occured while storing the uploaded file in the server' })

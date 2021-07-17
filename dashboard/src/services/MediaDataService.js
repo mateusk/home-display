@@ -1,11 +1,11 @@
 import axios from 'axios'
 
 class MediaDataService {
-  baseURL = 'http://localhost:3001/api/media'
+  apiURL = process.env.VUE_APP_BACKEND_API_URL
 
   getAll(params) {
     return axios.get(
-      `${this.baseURL}`,
+      `${this.apiURL}`,
       { params },
       {
         headers: {
@@ -16,7 +16,7 @@ class MediaDataService {
   }
 
   getSingle(id) {
-    return axios.get(`${this.baseURL}/${id}`, {
+    return axios.get(`${this.apiURL}/${id}`, {
       headers: {
         'Content-type': 'application/json',
       },
@@ -25,7 +25,7 @@ class MediaDataService {
 
   store(data) {
     return axios
-      .post(`${this.baseURL}`, data, {
+      .post(`${this.apiURL}`, data, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -40,7 +40,7 @@ class MediaDataService {
   }
 
   update(id, data) {
-    return axios.put(`${this.baseURL}/${id}`, data, {
+    return axios.put(`${this.apiURL}/${id}`, data, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -48,7 +48,7 @@ class MediaDataService {
   }
 
   delete(id) {
-    return axios.delete(`${this.baseURL}/${id}`, {
+    return axios.delete(`${this.apiURL}/${id}`, {
       headers: {
         'Content-type': 'application/json',
       },
