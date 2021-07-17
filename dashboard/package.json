@@ -7,17 +7,6 @@
     "build": "vue-cli-service build",
     "lint": "lint-staged"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint"
-    }
-  },
-  "lint-staged": {
-    "./**/*.js": [
-      "prettier --write",
-      "eslint --fix"
-    ]
-  },
   "dependencies": {
     "axios": "^0.21.1",
     "bootstrap-vue": "^2.21.2",
@@ -37,14 +26,23 @@
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-vue": "^6.2.2",
-    "husky": "^7.0.1",
     "lint-staged": "^11.0.0",
     "prettier": "^1.19.1",
     "pug": "^3.0.2",
     "pug-plain-loader": "^1.1.0",
     "vue-template-compiler": "^2.6.11"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,vue}": [
+      "vue-cli-service lint",
+      "git add"
+    ]
   }
 }
