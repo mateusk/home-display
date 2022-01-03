@@ -1,0 +1,20 @@
+FROM node:lts-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+
+RUN apk add --update --no-cache python3 py3-pip make g++ && rm -rf /var/cache/apk/*
+
+RUN npm install
+
+ADD babel.config.js ./
+ADD .prettierrc ./
+ADD .eslintrc.js ./
+ADD .stylelintrc ./
+ADD jest.config.js ./
+ADD cypress.json ./
+ADD .browserslistrc ./
+COPY public ./
+
+CMD [ "npm", "run", "serve" ]

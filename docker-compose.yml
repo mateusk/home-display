@@ -1,0 +1,43 @@
+version: "3"
+services:
+  frontend:
+    container_name: home-display-frontend
+    build:
+      context: frontend
+      dockerfile: Dockerfile.dev
+    restart: always
+    ports:
+      - 8080:8080
+    volumes:
+      - ./frontend/public:/app/public
+      - ./frontend/src:/app/src
+      - ./frontend/tests:/app/tests
+    environment:
+      APP_BASE_URL: ${APP_BASE_URL}
+      STRAPI_URL: ${STRAPI_URL}
+      CDN_BASE_URL: ${CDN_BASE_URL}
+
+  backend:
+    image: strapi/strapi
+    environment:
+      DATABASE_CLIENT: postgres
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_HOST: postgres
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+    volumes:
+      - ./backend:/srv/app
+    ports:
+      - 1337:1337
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+    volumes:
+      - ./data:/var/lib/postgresql/data
