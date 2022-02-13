@@ -7,37 +7,47 @@ services:
       dockerfile: Dockerfile.dev
     restart: always
     ports:
-      - 8080:8080
+      - 3000:3000
     volumes:
-      - ./frontend/public:/app/public
-      - ./frontend/src:/app/src
-      - ./frontend/tests:/app/tests
+      - ./frontend:/app
+      - /app/node_modules
     environment:
       APP_BASE_URL: ${APP_BASE_URL}
       STRAPI_URL: ${STRAPI_URL}
       CDN_BASE_URL: ${CDN_BASE_URL}
 
   backend:
-    image: strapi/strapi
+    container_name: home-display-backend
+    build:
+      context: backend
+      dockerfile: Dockerfile.dev
     environment:
-      DATABASE_CLIENT: postgres
-      DATABASE_NAME: ${DATABASE_NAME}
-      DATABASE_HOST: postgres
-      DATABASE_PORT: ${DATABASE_PORT}
-      DATABASE_USERNAME: ${DATABASE_USERNAME}
-      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DATABASE_NAME: "${DATABASE_NAME}"
+      DATABASE_HOST: "${DATABASE_HOST}"
+      DATABASE_PORT: "${DATABASE_PORT}"
+      DATABASE_USERNAME: "${DATABASE_USERNAME}"
+      DATABASE_PASSWORD: "${DATABASE_PASSWORD}"
+      JWT_SECRET: "${JWT_SECRET}"
+      ADMIN_JWT_SECRET: "${ADMIN_JWT_SECRET}"
     volumes:
-      - ./backend:/srv/app
+      - ./backend:/app
+      - /app/node_modules
     ports:
       - 1337:1337
     depends_on:
       - postgres
 
   postgres:
+    container_name: home-display-db
     image: postgres
     environment:
-      POSTGRES_DB: ${DATABASE_NAME}
-      POSTGRES_USER: ${DATABASE_USERNAME}
-      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: "${POSTGRES_DB}"
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+    ports:
+      - "${DATABASE_PORT}:${DATABASE_PORT}"
     volumes:
-      - ./data:/var/lib/postgresql/data
+      - home-display-db:/var/lib/postgresql/data
+
+volumes:
+  home-display-db:

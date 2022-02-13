@@ -1,26 +1,44 @@
 module.exports = {
   root: true,
-  env: {
-    node: true,
-  },
-  extends: ['plugin:vue/vue3-essential', 'eslint:recommended', '@vue/prettier'],
-  parserOptions: {
-    parser: 'babel-eslint',
-  },
-  rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'vue/no-multiple-template-root': 'off',
-  },
-  overrides: [
-    {
-      files: [
-        '**/__tests__/*.{j,t}s?(x)',
-        '**/tests/unit/**/*.spec.{j,t}s?(x)',
-      ],
-      env: {
-        jest: true,
-      },
-    },
+  env: { node: true },
+  parser: 'vue-eslint-parser',
+  parserOptions: {},
+  plugins: ['prettier'],
+  extends: [
+    'plugin:vue/vue3-recommended',
+    'plugin:vuejs-accessibility/recommended',
+    'prettier',
   ],
+  rules: {
+    'prettier/prettier': 'warn',
+    'vue/comment-directive': 'off',
+    'vue/multi-word-component-names': 'off',
+    'vue/component-definition-name-casing': ['error', 'PascalCase'],
+    'vue/component-name-in-template-casing': [
+      'error',
+      'PascalCase',
+      { registeredComponentsOnly: true },
+    ],
+    'vue/max-attributes-per-line': [
+      'error',
+      {
+        singleline: {
+          max: 4,
+        },
+        multiline: {
+          max: 1,
+        },
+      },
+    ],
+    'comma-dangle': [
+      'error',
+      {
+        arrays: 'always-multiline',
+        objects: 'always-multiline',
+        imports: 'always-multiline',
+        exports: 'always-multiline',
+        functions: 'never',
+      },
+    ],
+  },
 }
