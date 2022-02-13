@@ -116,3 +116,6 @@ vetur.config.js
 
 # Media files
 backend/uploads/
+backend/.env.bkp
+*.mp4
+*.jpeg
