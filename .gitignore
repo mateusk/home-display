@@ -119,3 +119,5 @@ backend/uploads/
 backend/.env.bkp
 *.mp4
 *.jpeg
+
+public/
