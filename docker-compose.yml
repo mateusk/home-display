@@ -1,0 +1,18 @@
+version: "3.7"
+
+services:
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    environment:
+      REMOTE_ASSETS_FOLDER: "${REMOTE_ASSETS_FOLDER}"
+    container_name: home-display
+    volumes:
+      - ./src:/app/src
+      - ${REMOTE_ASSETS_FOLDER}:/app/public
+      - ./index.html:/app/index.html
+      - ./vite.config.js:/app/vite.config.js
+    ports:
+      - "3000:3000"
